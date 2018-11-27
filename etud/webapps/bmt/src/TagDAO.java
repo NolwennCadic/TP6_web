@@ -1,3 +1,5 @@
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,4 +44,23 @@ public class TagDAO {
 		} finally{conn.close();}
 	}
 	//TODO
+	public Tag  getTagByName(String name, User user) throws SQLException {
+		List<Tag> list = getTags(user);
+		// Itere sur les tags pour trouver celuin avec le nom name
+		for (Tag tag : list) {
+		    if (tag.getName() == name) return tag;
+        }
+        return null;
+	}
+
+    public void saveTag(Tag tag, User user) throws SQLException {
+	    Connection conn = DBConnection.getConnection();
+	    // Ouvre la connection et insert le nouveau tag
+        try {
+            String SQL_INSERT_TAG = "INSERT INTO Tag(`name`, `user_id`) VALUES (?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(SQL_INSERT_TAG);
+            stmt.setString(1, tag.getName());
+            stmt.setLong(2, user.getId());
+        } finally{conn.close();}
+    }
 }

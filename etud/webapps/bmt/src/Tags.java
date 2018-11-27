@@ -77,6 +77,10 @@ public class Tags {
 		// Handle POST
 		if (method == Dispatcher.RequestMethod.POST) {
 			// TODO 1
+//
+//			Tag tag =
+//			Tag existingTag =
+
 		}
 
 		// Other
