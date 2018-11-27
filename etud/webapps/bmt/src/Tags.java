@@ -234,7 +234,8 @@ public class Tags {
 	}
 
 	/**
-	 * TODO comment
+	 * TODO donne la liste des marque-pages attachés au tag
+	 * dont l'ID est <tid>CR 200
 	 *
 	 * @param req
 	 * @param resp
