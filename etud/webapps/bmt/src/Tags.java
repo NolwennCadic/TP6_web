@@ -142,7 +142,9 @@ public class Tags {
 			try {
 				if(TagDAO.getTagById(id, user) != null) {
 				// Encode the tag list to JSON
-				String json = TagDAO.getTagById(id, user).toJson();
+				String json = "[";
+				json += TagDAO.getTagById(id, user).toJson();
+				json += "]";
 				// Send the response
 				resp.setStatus(200);
 				resp.setContentType("application/json");
@@ -160,6 +162,7 @@ public class Tags {
 		
 		//handle PUT
 		if (method == Dispatcher.RequestMethod.PUT){
+			System.out.println("modifier tag ");
 			// Récupérer la liste des tags
 			List<Tag> tags = null;
 			try {
@@ -170,15 +173,18 @@ public class Tags {
 			}
 			/* On récupère l'id que l'utilisateur a entré */
 			Long id = (long) Integer.parseInt(requestPath[2]);
+			Tag tag ;
 			try {
 				if(TagDAO.getTagById(id, user) != null) {
+				System.out.println("il ya bien un élement");
 				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
 				// Recuperation du nom passé en paramètre
 				String newTagName = jsonTag.getString("name");
 				//ON modifie le name et on updata la BD
-				TagDAO.updateTag(TagDAO.getTagById(id, user), newTagName,user);
-				//Modifie dans la BD
-				
+				tag = TagDAO.getTagById(id, user);
+				System.out.println("id " + id);
+				System.out.println("newTagName "+ newTagName);
+				TagDAO.updateTag(tag, newTagName,user);
 				// Send the response
 				resp.setStatus(204);
 				resp.setContentType("application/json");
@@ -195,6 +201,7 @@ public class Tags {
 		
 		//handle DELETE
 		if (method == Dispatcher.RequestMethod.DELETE){
+			System.out.println("delete tag ");
 			// Récupérer la liste des tags
 			List<Tag> tags = null;
 			try {

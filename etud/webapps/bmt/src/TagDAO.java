@@ -18,7 +18,7 @@ public class TagDAO {
 	 */
 	private static final String SQL_READ_TAGS = "select id,name from Tag where user_id=?";
 	private static final String SQL_INSERT_TAG = "INSERT INTO Tag(`name`, `user_id`) VALUES (?, ?)";
-	private static final String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE user_id=? AND name = ?";
+	private static final String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE id=?";
 	private static final String SQL_DELETE_TAG = "DELETE FROM Tag WHERE id=?";
 
 	/**
@@ -90,8 +90,7 @@ public class TagDAO {
         try {
             PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE_TAG);
             stmt.setString(1, newTagName);
-            stmt.setLong(2, user.getId());
-            stmt.setString(3, tag.getName());
+            stmt.setLong(2, tag.getId());
             stmt.executeUpdate();
         } finally{conn.close();}
         //http://localhost:8080/bmt/tata/tags/1?x-http-method=put&json={'id':1,'name':"toto"}
