@@ -43,7 +43,8 @@ public class TagDAO {
 			return list;
 		} finally{conn.close();}
 	}
-	//TODO
+
+	//Récupère le tag qui a un nom donné
 	public static Tag  getTagByName(String name, User user) throws SQLException {
 		List<Tag> list = getTags(user);
 		// Itere sur les tags pour trouver celui avec le nom name
@@ -53,6 +54,17 @@ public class TagDAO {
         return null;
 	}
 
+	//Récupère le tag qui a un ID donné
+	public static Tag  getTagById(Long id, User user) throws SQLException {
+		List<Tag> list = getTags(user);
+		// Itere sur les tags pour trouver celui avec le tag id
+		for (Tag tag : list) {
+			if (tag.getId() == id) return tag;
+		}
+		return null;
+	}
+
+	//Enregistre un tag sur la base de donnée
     public static void saveTag(Tag tag, User user) throws SQLException {
 	    Connection conn = DBConnection.getConnection();
 	    // Ouvre la connection et insert le nouveau tag

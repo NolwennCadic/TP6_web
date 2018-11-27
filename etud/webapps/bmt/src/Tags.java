@@ -98,6 +98,7 @@ public class Tags {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            return;
 
 		}
 
@@ -106,7 +107,8 @@ public class Tags {
 	}
 
 	/**
-	 * TODO comment
+	 * Pour cette fonction, on gère lorsque qu'un id est passé en chemin
+	 *  Les methodes autorisées sont get, put et delete
 	 *
 	 * @param req
 	 * @param resp
@@ -120,6 +122,43 @@ public class Tags {
 			Map<String, List<String>> queryParams, User user) throws IOException{
 		System.out.println("Action: handleTag - " + method + "-" + queryParams);
 		// TODO 2
+		if (method == Dispatcher.RequestMethod.POST){
+			resp.setStatus(405);
+			return;
+		}
+
+		//handle GET
+		if (method == Dispatcher.RequestMethod.GET){
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			try {
+				if(TagDAO.getTagById(id, user) != null) {
+				// Encode the tag list to JSON
+				String json = "[";
+				json += TagDAO.getTagById(id, user).toJson();
+				json += "]";
+				// Send the response
+				resp.setStatus(200);
+				resp.setContentType("application/json");
+				resp.getWriter().print(json);
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
 	}
 
 	/**
