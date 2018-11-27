@@ -77,9 +77,27 @@ public class Tags {
 		// Handle POST
 		if (method == Dispatcher.RequestMethod.POST) {
 			// TODO 1
-//
-//			Tag tag =
-//			Tag existingTag =
+			// Recupere le string passe en parametre et le transforme en json
+            System.out.println("Dans le 1er if");
+            JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
+			// Recuperation du nom passé en paramètre
+			String tagName = jsonTag.getString("name");
+            try {
+                System.out.println("TagDAO.getTagByName(tagName, user)" + TagDAO.getTagByName(tagName, user));
+                if (TagDAO.getTagByName(tagName, user) == null) {
+                    // Crée un tag
+                    Tag tag = new Tag(tagName);
+                    // Ajoute à la BD
+                    TagDAO.saveTag(tag, user);
+                    System.out.println("la");
+                    resp.setStatus(200);
+
+                } else {
+                    resp.setStatus(403);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
 		}
 

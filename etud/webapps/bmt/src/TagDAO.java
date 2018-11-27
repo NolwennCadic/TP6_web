@@ -44,16 +44,16 @@ public class TagDAO {
 		} finally{conn.close();}
 	}
 	//TODO
-	public Tag  getTagByName(String name, User user) throws SQLException {
+	public static Tag  getTagByName(String name, User user) throws SQLException {
 		List<Tag> list = getTags(user);
-		// Itere sur les tags pour trouver celuin avec le nom name
+		// Itere sur les tags pour trouver celui avec le nom name
 		for (Tag tag : list) {
 		    if (tag.getName() == name) return tag;
         }
         return null;
 	}
 
-    public void saveTag(Tag tag, User user) throws SQLException {
+    public static void saveTag(Tag tag, User user) throws SQLException {
 	    Connection conn = DBConnection.getConnection();
 	    // Ouvre la connection et insert le nouveau tag
         try {
@@ -61,6 +61,7 @@ public class TagDAO {
             PreparedStatement stmt = conn.prepareStatement(SQL_INSERT_TAG);
             stmt.setString(1, tag.getName());
             stmt.setLong(2, user.getId());
+            stmt.executeUpdate();
         } finally{conn.close();}
     }
 }
