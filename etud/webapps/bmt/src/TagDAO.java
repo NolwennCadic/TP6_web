@@ -17,6 +17,9 @@ public class TagDAO {
 	 * SQL query for user login
 	 */
 	private static final String SQL_READ_TAGS = "select id,name from Tag where user_id=?";
+	private static final String SQL_INSERT_TAG = "INSERT INTO Tag(`name`, `user_id`) VALUES (?, ?)";
+	private static final String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE user_id=? AND name = ?";
+	private static final String SQL_DELETE_TAG = "DELETE FROM Tag WHERE id=?";
 
 	/**
 	 * Provides the tags of a user.
@@ -66,10 +69,10 @@ public class TagDAO {
 
 	//Enregistre un tag sur la base de donnée
     public static void saveTag(Tag tag, User user) throws SQLException {
+    	//Ouvre la connection et 
 	    Connection conn = DBConnection.getConnection();
-	    // Ouvre la connection et insert le nouveau tag
+	    //insert le nouveau tag
         try {
-            String SQL_INSERT_TAG = "INSERT INTO Tag(`name`, `user_id`) VALUES (?, ?)";
             PreparedStatement stmt = conn.prepareStatement(SQL_INSERT_TAG);
             stmt.setString(1, tag.getName());
             stmt.setLong(2, user.getId());
@@ -79,10 +82,12 @@ public class TagDAO {
     
 	//Modifie le name d'un tag
     public static void updateTag(Tag tag, String newTagName, User user) throws SQLException {
+    	// Ouvre la connection 
 	    Connection conn = DBConnection.getConnection();
-	    // Ouvre la connection et insert le nouveau tag
+	    //On modifie son nom
+	    tag.setName(newTagName);
+	    //modifie
         try {
-            String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE user_id=? AND name = ?";
             PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE_TAG);
             stmt.setString(1, newTagName);
             stmt.setLong(2, user.getId());
@@ -91,4 +96,17 @@ public class TagDAO {
         } finally{conn.close();}
         //http://localhost:8080/bmt/tata/tags/1?x-http-method=put&json={'id':1,'name':"toto"}
     }
+    
+    //Fonction pour supprimer un tag
+	public static void deleteTag(Long id, User user) throws SQLException {
+		//Ouvre la connection
+		 Connection conn = DBConnection.getConnection();
+		    //Supprime le tag
+	        try {
+	            PreparedStatement stmt = conn.prepareStatement(SQL_DELETE_TAG);
+	            stmt.setLong(1, id);
+	            stmt.execute();
+	        } finally{conn.close();}
+		
+	}
 }

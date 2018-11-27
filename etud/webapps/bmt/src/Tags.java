@@ -122,7 +122,6 @@ public class Tags {
 			Map<String, List<String>> queryParams, User user) throws IOException{
 		System.out.println("Action: handleTag - " + method + "-" + queryParams);
 		// Rule-out POST request
-		System.out.println("hello there");
 		if (method == Dispatcher.RequestMethod.POST){
 			resp.setStatus(405);
 			return;
@@ -161,7 +160,6 @@ public class Tags {
 		
 		//handle PUT
 		if (method == Dispatcher.RequestMethod.PUT){
-			System.out.println("hello there");
 			// Récupérer la liste des tags
 			List<Tag> tags = null;
 			try {
@@ -173,19 +171,16 @@ public class Tags {
 			/* On récupère l'id que l'utilisateur a entré */
 			Long id = (long) Integer.parseInt(requestPath[2]);
 			try {
-				System.out.println("hello there");
 				if(TagDAO.getTagById(id, user) != null) {
-				System.out.println("hello there");
 				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
 				// Recuperation du nom passé en paramètre
 				String newTagName = jsonTag.getString("name");
-				System.out.println("new name " + newTagName );
 				//ON modifie le name et on updata la BD
 				TagDAO.updateTag(TagDAO.getTagById(id, user), newTagName,user);
 				//Modifie dans la BD
 				
 				// Send the response
-				resp.setStatus(200);
+				resp.setStatus(204);
 				resp.setContentType("application/json");
 				return;
 				}else {
@@ -197,6 +192,38 @@ public class Tags {
 				return;
 			}
 		}
+		
+		//handle DELETE
+		if (method == Dispatcher.RequestMethod.DELETE){
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			try {
+				if(TagDAO.getTagById(id, user) != null) {
+				//ON modifie le name et on updata la BD
+				System.out.println("hello there");
+				TagDAO.deleteTag(id, user);
+				// Send the response
+				resp.setStatus(204);
+				resp.setContentType("application/json");
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
+		
 	}
 
 	/**
