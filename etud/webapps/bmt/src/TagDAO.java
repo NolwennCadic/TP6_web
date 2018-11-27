@@ -76,4 +76,19 @@ public class TagDAO {
             stmt.executeUpdate();
         } finally{conn.close();}
     }
+    
+	//Modifie le name d'un tag
+    public static void updateTag(Tag tag, String newTagName, User user) throws SQLException {
+	    Connection conn = DBConnection.getConnection();
+	    // Ouvre la connection et insert le nouveau tag
+        try {
+            String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE user_id=? AND name = ?";
+            PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE_TAG);
+            stmt.setString(1, newTagName);
+            stmt.setLong(2, user.getId());
+            stmt.setString(3, tag.getName());
+            stmt.executeUpdate();
+        } finally{conn.close();}
+        //http://localhost:8080/bmt/tata/tags/1?x-http-method=put&json={'id':1,'name':"toto"}
+    }
 }

@@ -121,7 +121,8 @@ public class Tags {
 			Dispatcher.RequestMethod method, String[] requestPath,
 			Map<String, List<String>> queryParams, User user) throws IOException{
 		System.out.println("Action: handleTag - " + method + "-" + queryParams);
-		// TODO 2
+		// Rule-out POST request
+		System.out.println("hello there");
 		if (method == Dispatcher.RequestMethod.POST){
 			resp.setStatus(405);
 			return;
@@ -142,13 +143,50 @@ public class Tags {
 			try {
 				if(TagDAO.getTagById(id, user) != null) {
 				// Encode the tag list to JSON
-				String json = "[";
-				json += TagDAO.getTagById(id, user).toJson();
-				json += "]";
+				String json = TagDAO.getTagById(id, user).toJson();
 				// Send the response
 				resp.setStatus(200);
 				resp.setContentType("application/json");
 				resp.getWriter().print(json);
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
+		
+		//handle PUT
+		if (method == Dispatcher.RequestMethod.PUT){
+			System.out.println("hello there");
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			try {
+				System.out.println("hello there");
+				if(TagDAO.getTagById(id, user) != null) {
+				System.out.println("hello there");
+				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
+				// Recuperation du nom passé en paramètre
+				String newTagName = jsonTag.getString("name");
+				System.out.println("new name " + newTagName );
+				//ON modifie le name et on updata la BD
+				TagDAO.updateTag(TagDAO.getTagById(id, user), newTagName,user);
+				//Modifie dans la BD
+				
+				// Send the response
+				resp.setStatus(200);
+				resp.setContentType("application/json");
 				return;
 				}else {
                     resp.setStatus(403);
