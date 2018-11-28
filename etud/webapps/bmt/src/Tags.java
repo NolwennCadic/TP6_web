@@ -93,6 +93,7 @@ public class Tags {
                     resp.setStatus(200);
 
                 } else {
+                    // si le tag existe déjà, renvoie status d'erreur
                     resp.setStatus(403);
                 }
             } catch (SQLException e) {
