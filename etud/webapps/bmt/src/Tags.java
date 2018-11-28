@@ -1,3 +1,4 @@
+import java.awt.print.Book;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -131,13 +132,13 @@ public class Tags {
 		//handle GET
 		if (method == Dispatcher.RequestMethod.GET){
 			// Récupérer la liste des tags
-			List<Tag> tags = null;
-			try {
-				tags = TagDAO.getTags(user);
-			} catch (SQLException ex) {
-				resp.setStatus(500);
-				return;
-			}
+//			List<Tag> tags = null;
+//			try {
+//				tags = TagDAO.getTags(user);
+//			} catch (SQLException ex) {
+//				resp.setStatus(500);
+//				return;
+//			}
 			/* On récupère l'id que l'utilisateur a entré */
 			Long id = (long) Integer.parseInt(requestPath[2]);
 			try {
@@ -152,7 +153,7 @@ public class Tags {
 				resp.getWriter().print(json);
 				return;
 				}else {
-                    resp.setStatus(403);
+                    resp.setStatus(404);
                     return;
                 }
 			}catch (SQLException ex) {
@@ -250,11 +251,49 @@ public class Tags {
 			Map<String, List<String>> queryParams, User user) throws IOException {
 
 		System.out.println("Action: handleTagBookmarks - " + method + "-" + queryParams);
-		// TODO 2
+		// handle GET
+		if (method == Dispatcher.RequestMethod.GET) {
+			//Récupère id du tag
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			List<Bookmark> bookmarks = null;
+			List<Tag> tags = null;
+			try {
+				// si le tag existe bien
+				if(TagDAO.getTagById(id, user) != null) {
+					bookmarks = BookmarkDAO.getListOfBookmarkFromTag(id, user);
+					//Encode the bookmarkList in json
+					String json = "[";
+					for (int i = 0, n = bookmarks.size(); i < n; i++) {
+						Bookmark bookmark = bookmarks.get(i);
+						json += bookmark.toJson();
+						if (i < n - 1)
+							json += ", ";
+					}
+					json += "]";
+					// Send the response
+					resp.setStatus(200);
+					resp.setContentType("application/json");
+					resp.getWriter().print(json);
+					return;
+
+				}
+				else {
+					System.out.println("Dans else");
+					resp.setStatus(405);
+					return;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			resp.setStatus(405);
+			return;
+		}
 	}
 
 	/**
-	 * TODO comment
+	 * TODO
+	 * Gère l'attachement des tags aux bookmarks
 	 *
 	 * @param req
 	 * @param resp
@@ -267,6 +306,36 @@ public class Tags {
 			Dispatcher.RequestMethod method, String[] requestPath,
 			Map<String, List<String>> queryParams, User user) throws IOException {
 		System.out.println("Action: handleTagBookmark - " + method + "-" + queryParams);
-		// TODO 2
+		// Handle the get
+		if (method == Dispatcher.RequestMethod.GET) {
+			// get the id of the bookmark
+			Long bookmarkID = (long) Integer.parseInt(requestPath[4]);
+			//get the tag of the bookmark
+			Long tagId = (long) Integer.parseInt(requestPath[2]);
+			try {
+				Bookmark bookmark = BookmarkDAO.getBookmarkById(bookmarkID, user);
+				Tag tag = TagDAO.getTagById(tagId, user);
+				// Test if the given tag an bookmark exist
+				if(bookmark != null && tag != null) {
+					if (bookmark.containsTag(tagId)) {
+						resp.setStatus(200);
+						return;
+					}
+					else {
+						resp.setStatus(404);
+						return;
+					}
+
+				} else {
+					resp.setStatus(404);
+					return;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			resp.setStatus(405);
+			return;
+		}
 	}
 }
