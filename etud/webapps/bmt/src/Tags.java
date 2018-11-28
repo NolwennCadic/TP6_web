@@ -316,18 +316,70 @@ public class Tags {
 				Bookmark bookmark = BookmarkDAO.getBookmarkById(bookmarkID, user);
 				Tag tag = TagDAO.getTagById(tagId, user);
 				// Test if the given tag an bookmark exist
-				if(bookmark != null && tag != null) {
+				if (bookmark != null && tag != null) {
 					if (bookmark.containsTag(tagId)) {
 						resp.setStatus(200);
 						return;
-					}
-					else {
+					} else {
 						resp.setStatus(404);
 						return;
 					}
 
 				} else {
 					resp.setStatus(404);
+					return;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if (method == Dispatcher.RequestMethod.PUT) {
+			// get the id of the bookmark
+			Long bookmarkID = (long) Integer.parseInt(requestPath[4]);
+			//get the tag of the bookmark
+			Long tagId = (long) Integer.parseInt(requestPath[2]);
+			Bookmark bookmark = null;
+			try {
+				bookmark = BookmarkDAO.getBookmarkById(bookmarkID, user);
+				Tag tag = TagDAO.getTagById(tagId, user);
+				// Test if the given tag an bookmark exist
+				if (bookmark != null && tag != null) {
+					if (bookmark.containsTag(tagId)) {
+						// Ne fait rien
+						resp.setStatus(304);
+						return;
+					} else {
+						TagDAO.attachedBookMark(bookmarkID, tagId);
+						resp.setStatus(204);
+						return;
+					}
+
+				} else {
+					resp.setStatus(403);
+					return;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if (method == Dispatcher.RequestMethod.DELETE) {
+			// get the id of the bookmark
+			Long bookmarkID = (long) Integer.parseInt(requestPath[4]);
+			//get the tag of the bookmark
+			Long tagId = (long) Integer.parseInt(requestPath[2]);
+			Bookmark bookmark = null;
+			try {
+				bookmark = BookmarkDAO.getBookmarkById(bookmarkID, user);
+				Tag tag = TagDAO.getTagById(tagId, user);
+				if (bookmark != null && tag != null) {
+					if (bookmark.containsTag(tagId)) {
+						TagDAO.removeAttachmentBookmark(bookmarkID, tagId);
+						resp.setStatus(204);
+						return;
+					} else {
+						resp.setStatus(403);
+						return;
+					}
+				} else {
+					resp.setStatus(403);
 					return;
 				}
 			} catch (SQLException e) {

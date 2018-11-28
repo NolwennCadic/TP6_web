@@ -138,11 +138,25 @@ public class Bookmark {
      * @return true or false
      */
     public boolean containsTag(Long id) {
-        for(Tag tag : tags) {
+        for(Tag tag : this.tags) {
             if (tag.getId() == id) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Remove the given tag of the list tags
+     * @param id the ID of the tag to remove
+     */
+    public void removeTag(Long id) {
+        List<Tag> tags = new ArrayList<>();
+        for (Tag tag : this.tags) {
+            if (tag.getId() != id) {
+                tags.add(tag);
+            }
+        }
+        this.tags = tags;
     }
 }

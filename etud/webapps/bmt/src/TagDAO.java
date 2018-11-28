@@ -18,6 +18,8 @@ public class TagDAO {
     private static final String SQL_INSERT_TAG = "INSERT INTO Tag(`name`, `user_id`) VALUES (?, ?)";
     private static final String SQL_UPDATE_TAG = "UPDATE Tag set name = ? WHERE id=?";
     private static final String SQL_DELETE_TAG = "DELETE FROM Tag WHERE id=?";
+    private static final String SQL_ATTACHED_BOOKMARK = "INSERT INTO BOOKMARK_TAG VALUES(?, ?)";
+    private static final String SQL_DETACHED_BOOKARK = "DELETE FROM BOOKMARK_TAG WHERE BOOKMARKS_ID = ? AND TAGS_ID = ?";
 
     /**
      * Provides the tags of a user.
@@ -111,6 +113,30 @@ public class TagDAO {
             conn.close();
         }
 
+    }
+
+    public static void attachedBookMark(Long bookmarkId, Long tagId) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(SQL_ATTACHED_BOOKMARK);
+            stmt.setLong(1, bookmarkId);
+            stmt.setLong(2, tagId);
+            stmt.execute();
+        } finally {
+            conn.close();
+        }
+    }
+
+    public static void removeAttachmentBookmark(Long bookmarkId, Long tagId) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(SQL_DETACHED_BOOKARK);
+            stmt.setLong(1, bookmarkId);
+            stmt.setLong(2, tagId);
+            stmt.execute();
+        } finally {
+            conn.close();
+        }
     }
 
 
