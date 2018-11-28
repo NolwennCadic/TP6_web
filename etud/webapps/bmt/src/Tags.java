@@ -99,6 +99,7 @@ public class Tags {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            return;
 
 		}
 
@@ -107,7 +108,8 @@ public class Tags {
 	}
 
 	/**
-	 * TODO comment
+	 * Pour cette fonction, on gère lorsque qu'un id est passé en chemin
+	 *  Les methodes autorisées sont get, put et delete
 	 *
 	 * @param req
 	 * @param resp
@@ -120,11 +122,121 @@ public class Tags {
 			Dispatcher.RequestMethod method, String[] requestPath,
 			Map<String, List<String>> queryParams, User user) throws IOException{
 		System.out.println("Action: handleTag - " + method + "-" + queryParams);
-		// TODO 2
+		// Rule-out POST request
+		if (method == Dispatcher.RequestMethod.POST){
+			resp.setStatus(405);
+			return;
+		}
+
+		//handle GET
+		if (method == Dispatcher.RequestMethod.GET){
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			try {
+				if(TagDAO.getTagById(id, user) != null) {
+				// Encode the tag list to JSON
+				String json = "[";
+				json += TagDAO.getTagById(id, user).toJson();
+				json += "]";
+				// Send the response
+				resp.setStatus(200);
+				resp.setContentType("application/json");
+				resp.getWriter().print(json);
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
+		
+		//handle PUT
+		if (method == Dispatcher.RequestMethod.PUT){
+			System.out.println("modifier tag ");
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			Tag tag ;
+			try {
+				if(TagDAO.getTagById(id, user) != null) {
+				System.out.println("il ya bien un élement");
+				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
+				// Recuperation du nom passé en paramètre
+				String newTagName = jsonTag.getString("name");
+				//ON modifie le name et on updata la BD
+				tag = TagDAO.getTagById(id, user);
+				System.out.println("id " + id);
+				System.out.println("newTagName "+ newTagName);
+				TagDAO.updateTag(tag, newTagName,user);
+				// Send the response
+				resp.setStatus(204);
+				resp.setContentType("application/json");
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
+		
+		//handle DELETE
+		if (method == Dispatcher.RequestMethod.DELETE){
+			System.out.println("delete tag ");
+			// Récupérer la liste des tags
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+			/* On récupère l'id que l'utilisateur a entré */
+			Long id = (long) Integer.parseInt(requestPath[2]);
+			try {
+				if(TagDAO.getTagById(id, user) != null) {
+				//ON modifie le name et on updata la BD
+				System.out.println("hello there");
+				TagDAO.deleteTag(id, user);
+				// Send the response
+				resp.setStatus(204);
+				resp.setContentType("application/json");
+				return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+                }
+			}catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
+		}
+		
 	}
 
 	/**
-	 * TODO comment
+	 * TODO donne la liste des marque-pages attachés au tag
+	 * dont l'ID est <tid>CR 200
 	 *
 	 * @param req
 	 * @param resp
