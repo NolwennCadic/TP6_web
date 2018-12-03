@@ -132,13 +132,13 @@ public class Tags {
 		//handle GET
 		if (method == Dispatcher.RequestMethod.GET){
 			// Récupérer la liste des tags
-//			List<Tag> tags = null;
-//			try {
-//				tags = TagDAO.getTags(user);
-//			} catch (SQLException ex) {
-//				resp.setStatus(500);
-//				return;
-//			}
+			List<Tag> tags = null;
+			try {
+				tags = TagDAO.getTags(user);
+			} catch (SQLException ex) {
+				resp.setStatus(500);
+				return;
+			}
 			/* On récupère l'id que l'utilisateur a entré */
 			Long id = (long) Integer.parseInt(requestPath[2]);
 			try {
@@ -180,6 +180,7 @@ public class Tags {
 				if(TagDAO.getTagById(id, user) != null) {
 				System.out.println("il ya bien un élement");
 				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
+				System.out.println("tag : " + queryParams.get("json").get(0));
 				// Recuperation du nom passé en paramètre
 				String newTagName = jsonTag.getString("name");
 				//ON modifie le name et on updata la BD

@@ -55,7 +55,7 @@ public class Bookmark {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -63,15 +63,19 @@ public class Bookmark {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getLink() { return this.link; }
+
+    public void setLink(String link) { this.link = link; }
+
     public List<Tag> getTags() {
-        return tags;
+        return this.tags;
     }
 
     public void setTags(List<Tag> tags) {

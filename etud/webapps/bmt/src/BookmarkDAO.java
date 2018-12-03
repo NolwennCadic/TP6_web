@@ -16,6 +16,8 @@ public class BookmarkDAO {
     private static final String SQL_GET_LIST_BM_OF_TAGS = "SELECT BOOKMARK.ID, BOOKMARK.TITLE, BOOKMARK.DESCRIPTION,"
             + "BOOKMARK.LINK  from TAG, BOOKMARK , BOOKMARK_TAG  where TAG.ID = BOOKMARK_TAG.TAGS_ID "
             + "AND BOOKMARK.ID = BOOKMARK_TAG.BOOKMARKS_ID AND BOOKMARK.USER_ID = ? AND TAG.ID = ?";
+    private static final String SQL_INSERT_BOOKMARK = "INSERT INTO BOOKMARK VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_MODIFY_BOOKMAR = "UPDATE BOOKMARK SET DESCRIPTION = ?, LINK=?, TITLE=?  WHERE ID = ?";
 
 
     public static List<Bookmark> getBookmarks(User user) throws SQLException {
@@ -47,7 +49,6 @@ public class BookmarkDAO {
      * @throws SQLException
      */
     public static List<Tag> getTagsOfBookmark(long bookmarkId, User user) throws SQLException {
-        System.out.println("bookMarkId : " + bookmarkId);
         List<Tag> list = new ArrayList<Tag>();
         Connection conn = DBConnection.getConnection();
         try {
@@ -95,6 +96,13 @@ public class BookmarkDAO {
         }
     }
 
+    /**
+     * Recupere le tag avec l'id passé en paramètres
+     * @param id id du tag
+     * @param user utilisateur
+     * @return le tag avec l'id id
+     * @throws SQLException
+     */
     public static Bookmark getBookmarkById(Long id, User user) throws SQLException {
         List<Bookmark> list = getBookmarks(user);
         // Itere sur les bookmarks pour trouver celui avec id
@@ -102,6 +110,46 @@ public class BookmarkDAO {
             if (bookmark.getId() == id) return bookmark;
         }
         return null;
+    }
+
+    public static void updateBookmark(Bookmark bookmark, String newTitle, String newDescription,
+                                      String newLink, List<Tag> newTags, User user) throws SQLException {
+        // Ouvre la connection
+        Connection conn = DBConnection.getConnection();
+        //Modifie le tag dans la classe
+//        bookmark.setTags(newTags);
+        bookmark.setDescription(newDescription);
+        bookmark.setTitle(newTitle);
+        //Modifie le tag dans la base de donnée
+        try {
+            PreparedStatement stmt = conn.prepareStatement(SQL_MODIFY_BOOKMAR);
+            stmt.setString(1, newDescription);
+            stmt.setString(2, newLink);
+            stmt.setString(3, newTitle);
+            stmt.setLong(4, user.getId());
+            stmt.executeUpdate();
+        } finally {
+            conn.close();
+        }
+        // Gère les nouveaux tags.
+        // On supprime l'attachement des anciens, on attache les nouveaux
+        for(Tag tag: bookmark.getTags()) {
+            TagDAO.removeAttachmentBookmark( bookmark.getId(), TagDAO.getTagById(tag.getId(), user).getId());
+        }
+        // On attache les nouveaux, si le tag n'existe pas, on le cree avant de l'attacher
+        for(Tag tag: newTags) {
+            // si le tag existe, on l'attache
+            if (TagDAO.getTagByName(tag.getName(), user) != null) {
+                TagDAO.attachedBookMark(bookmark.getId(), TagDAO.getTagByName(tag.getName(), user).getId());
+            }
+            else {
+                TagDAO.saveTag(tag, user);
+                Tag createdTag = TagDAO.getTagByName(tag.getName(), user);
+                TagDAO.attachedBookMark(bookmark.getId(), createdTag.getId());
+            }
+        }
+        // On update la liste des tags du bookmark
+        bookmark.setTags(newTags);
     }
 
 

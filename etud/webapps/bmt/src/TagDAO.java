@@ -52,7 +52,9 @@ public class TagDAO {
         List<Tag> list = getTags(user);
         // Itere sur les tags pour trouver celui avec le nom name
         for (Tag tag : list) {
-            if (tag.getName() == name) return tag;
+            if (tag.getName().equals(name)) {
+                return tag;
+            }
         }
         return null;
     }
