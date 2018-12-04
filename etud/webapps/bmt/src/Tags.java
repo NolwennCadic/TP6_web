@@ -182,16 +182,21 @@ public class Tags {
 				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
 				System.out.println("tag : " + queryParams.get("json").get(0));
 				// Recuperation du nom passé en paramètre
-				String newTagName = jsonTag.getString("name");
-				//ON modifie le name et on updata la BD
-				tag = TagDAO.getTagById(id, user);
-				System.out.println("id " + id);
-				System.out.println("newTagName "+ newTagName);
-				TagDAO.updateTag(tag, newTagName,user);
-				// Send the response
-				resp.setStatus(204);
-				resp.setContentType("application/json");
-				return;
+				if(jsonTag.has("name")) {
+					String newTagName = jsonTag.getString("name");
+					//ON modifie le name et on updata la BD
+					tag = TagDAO.getTagById(id, user);
+					System.out.println("id " + id);
+					System.out.println("newTagName "+ newTagName);
+					TagDAO.updateTag(tag, newTagName,user);
+					// Send the response
+					resp.setStatus(204);
+					resp.setContentType("application/json");
+					return;
+				}else {
+                    resp.setStatus(403);
+                    return;
+				}				
 				}else {
                     resp.setStatus(403);
                     return;
