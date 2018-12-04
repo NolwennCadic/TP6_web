@@ -12,14 +12,20 @@ public class BookmarkDAO {
 
     private static final String SQL_READ_BOOKMARKS = "select id, description, link, title from BOOKMARK where user_id=?";
     private static final String SQL_GET_BMS_TAG = "SELECT TAGS_ID  FROM BOOKMARK_TAG  where BOOKMARKs_ID = ?";
-
+    private static final String SQL_INSERT_BOOKMARK = "INSERT INTO BOOKMARK(`description`, `link`, `title`, `user_id`)  VALUES  (?, ?, ?, ?)";
     private static final String SQL_GET_LIST_BM_OF_TAGS = "SELECT BOOKMARK.ID, BOOKMARK.TITLE, BOOKMARK.DESCRIPTION,"
             + "BOOKMARK.LINK  from TAG, BOOKMARK , BOOKMARK_TAG  where TAG.ID = BOOKMARK_TAG.TAGS_ID "
             + "AND BOOKMARK.ID = BOOKMARK_TAG.BOOKMARKS_ID AND BOOKMARK.USER_ID = ? AND TAG.ID = ?";
-    private static final String SQL_INSERT_BOOKMARK = "INSERT INTO BOOKMARK VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_MODIFY_BOOKMAR = "UPDATE BOOKMARK SET DESCRIPTION = ?, LINK=?, TITLE=?  WHERE ID = ?";
+    private static final String SQL_MODIFY_BOOKMARK = "UPDATE BOOKMARK SET DESCRIPTION = ?, LINK=?, TITLE=?  WHERE ID = ?";
+    private static final String SQL_DELETE_BOOKMARK = "DELETE FROM BOOKMARK WHERE ID = ?";
 
 
+    /**
+     * Renvoie la liste de tous les bookmarks
+     * @param user
+     * @return liste de tous les bookmarks présents dans la BD
+     * @throws SQLException
+     */
     public static List<Bookmark> getBookmarks(User user) throws SQLException {
         List<Bookmark> list = new ArrayList<Bookmark>();
         Connection conn = DBConnection.getConnection();
@@ -29,9 +35,9 @@ public class BookmarkDAO {
             ResultSet result = stmt.executeQuery();
             while (result.next()){
                 long id = result.getLong(1);
-                String description = result.getString(3);
-                String title = result.getString(2);
-                String link = result.getString(4);
+                String description = result.getString(2);
+                String title = result.getString(4);
+                String link = result.getString(3);
                 Bookmark bookmark = new Bookmark(id, description, title, link);
                 bookmark.setTags(BookmarkDAO.getTagsOfBookmark(bookmark.getId(), user));
                 list.add(bookmark);
@@ -112,17 +118,29 @@ public class BookmarkDAO {
         return null;
     }
 
+    /**
+     * Mets à jour un bookmark dans la base de données
+     * @param bookmark
+     * @param newTitle
+     * @param newDescription
+     * @param newLink
+     * @param newTags
+     * @param user
+     * @throws SQLException
+     */
     public static void updateBookmark(Bookmark bookmark, String newTitle, String newDescription,
                                       String newLink, List<Tag> newTags, User user) throws SQLException {
         // Ouvre la connection
         Connection conn = DBConnection.getConnection();
         //Modifie le tag dans la classe
-//        bookmark.setTags(newTags);
+        System.out.println("Description : " + newDescription);
+        System.out.println("title " + newTitle);
+        System.out.println("lien " + newLink);
         bookmark.setDescription(newDescription);
         bookmark.setTitle(newTitle);
         //Modifie le tag dans la base de donnée
         try {
-            PreparedStatement stmt = conn.prepareStatement(SQL_MODIFY_BOOKMAR);
+            PreparedStatement stmt = conn.prepareStatement(SQL_MODIFY_BOOKMARK);
             stmt.setString(1, newDescription);
             stmt.setString(2, newLink);
             stmt.setString(3, newTitle);
@@ -152,5 +170,64 @@ public class BookmarkDAO {
         bookmark.setTags(newTags);
     }
 
+    /**
+     * Supprime un bookmark donné
+     * @param id id du bookmark à supprimer
+     * @param user
+     * @throws SQLException
+     */
+    public static void deleteBookmark(Long id, User user) throws SQLException {
+        //Ouvre la connection
+        Connection conn = DBConnection.getConnection();
+        //Supprime le tag
+        try {
+            PreparedStatement stmt = conn.prepareStatement(SQL_DELETE_BOOKMARK);
+            stmt.setLong(1, id);
+            stmt.execute();
+        } finally {
+            conn.close();
+        }
+    }
 
+    /**
+     * REnvoie le bookmark avec le lien passe en parametre
+     * @param link lien du bookmark qu'on cherche
+     * @param user
+     * @return bookmark
+     * @throws SQLException
+     */
+    public static Bookmark getBookmarkByLink(String link, User user) throws SQLException {
+        List<Bookmark> list = getBookmarks(user);
+        // Itere sur les bookmarks pour trouver celui avec id
+        for (Bookmark bookmark : list) {
+            if (bookmark.getLink().equals(link)) {
+                return bookmark;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sauvegarde le marque page dans la BD
+     * @param description
+     * @param link
+     * @param title
+     * @param user
+     * @throws SQLException
+     */
+    public static void saveBookmark(String description, String link, String title, User user) throws SQLException {
+        //Ouvre la connection et
+        Connection conn = DBConnection.getConnection();
+        //insert le nouveau bookmark
+        try {
+            PreparedStatement stmt = conn.prepareStatement(SQL_INSERT_BOOKMARK);
+            stmt.setString(1, description);
+            stmt.setString(2, link);
+            stmt.setString(3, title);
+            stmt.setLong(4, user.getId());
+            stmt.executeUpdate();
+        } finally {
+            conn.close();
+        }
+    }
 }
