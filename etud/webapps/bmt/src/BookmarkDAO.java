@@ -145,7 +145,7 @@ public class BookmarkDAO {
             stmt.setString(1, newDescription);
             stmt.setString(2, newLink);
             stmt.setString(3, newTitle);
-            stmt.setLong(4, user.getId());
+            stmt.setLong(4, bookmark.getId());
             stmt.executeUpdate();
         } finally {
             conn.close();
