@@ -136,6 +136,7 @@ public class BookmarkDAO {
         System.out.println("Description : " + newDescription);
         System.out.println("title " + newTitle);
         System.out.println("lien " + newLink);
+        System.out.println("user id " + user.getId());
         bookmark.setDescription(newDescription);
         bookmark.setTitle(newTitle);
         //Modifie le tag dans la base de donnée

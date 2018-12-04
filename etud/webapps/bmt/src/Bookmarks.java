@@ -198,8 +198,14 @@ public class Bookmarks {
                     }
                     if (jsonBookmark.has("link")) {
                         newLink = jsonBookmark.getString("link");
-                        // Test si le nouveau lien est valide, donc si il n'est pas déjà utilisé
-                        if (BookmarkDAO.getBookmarkByLink(newLink, user) != null) {
+                        System.out.println("bm id : " + id);
+//                        System.out.println("new bm id " + BookmarkDAO.getBookmarkByLink(newLink, user).getId());
+//                        boolean b = BookmarkDAO.getBookmarkByLink(newLink, user).getId() != id;
+//                        System.out.println("condition : " + b);
+                        // Test si le nouveau lien est valide, donc si il n'est pas déjà utilisé par un autre atg
+                        if (BookmarkDAO.getBookmarkByLink(newLink, user) != null &&
+                                BookmarkDAO.getBookmarkByLink(newLink, user).getId() != id) {
+                            System.out.println("dans if");
                             resp.setStatus(403);
                             return;
                         }

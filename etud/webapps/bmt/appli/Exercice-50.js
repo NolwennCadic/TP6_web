@@ -1,5 +1,5 @@
 /* Base URL of the web-service for the current user */
-var wsBase = '/bmt/login1-login2-login3/'
+var wsBase = '/bmt/tata/'
 
 /* Shows the identity of the current user */
 function setIdentity() {
