@@ -164,7 +164,6 @@ public class Tags {
 		
 		//handle PUT
 		if (method == Dispatcher.RequestMethod.PUT){
-			System.out.println("modifier tag ");
 			// Récupérer la liste des tags
 			List<Tag> tags = null;
 			try {
@@ -178,9 +177,7 @@ public class Tags {
 			Tag tag ;
 			try {
 				if(TagDAO.getTagById(id, user) != null) {
-				System.out.println("il ya bien un élement");
 				JSONObject jsonTag = new JSONObject(queryParams.get("json").get(0));
-				System.out.println("tag : " + queryParams.get("json").get(0));
 				// Recuperation du nom passé en paramètre
 				if(jsonTag.has("name")) {
 					String newTagName = jsonTag.getString("name");
@@ -209,7 +206,6 @@ public class Tags {
 		
 		//handle DELETE
 		if (method == Dispatcher.RequestMethod.DELETE){
-			System.out.println("delete tag ");
 			// Récupérer la liste des tags
 			List<Tag> tags = null;
 			try {
@@ -223,7 +219,6 @@ public class Tags {
 			try {
 				if(TagDAO.getTagById(id, user) != null) {
 				//ON modifie le name et on updata la BD
-				System.out.println("hello there");
 				TagDAO.deleteTag(id, user);
 				// Send the response
 				resp.setStatus(204);
@@ -366,6 +361,7 @@ public class Tags {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			// Handle the delete method
 		} else if (method == Dispatcher.RequestMethod.DELETE) {
 			// get the id of the bookmark
 			Long bookmarkID = (long) Integer.parseInt(requestPath[4]);
