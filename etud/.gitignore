@@ -1,2 +1,4 @@
-etud/TP5.h2.db
-etud/TP5.trace.db
+TP5.h2.db
+TP5.trace.db
+webapps/bmt/.classpath
+webapps/bmt/WEB-INF/classes/*
