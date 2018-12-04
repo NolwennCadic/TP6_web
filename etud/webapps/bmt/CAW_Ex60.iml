@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/WEB-INF/lib/h2-1.3.168.jar!/" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-ajp-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-annotations-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-client-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-continuation-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-deploy-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-http-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-io-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-jmx-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-jndi-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-overlay-deployer-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-plus-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-policy-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-rewrite-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-security-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-server-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-servlet-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-servlets-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-util-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-webapp-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-websocket-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-xml-8.1.8.v20121106.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/servlet-api-3.0.jar" />
+    <libelement value="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/webapps/bmt/WEB-INF/lib/json-20141113.jar" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/WEB-INF/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="h2-1.3.168.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WEB-INF/lib/h2-1.3.168.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="jetty-ajp-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-ajp-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-annotations-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-annotations-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-client-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-client-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-continuation-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-continuation-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-deploy-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-deploy-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-http-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-http-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-io-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-io-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-jmx-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-jmx-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-jndi-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-jndi-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-overlay-deployer-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-overlay-deployer-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-plus-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-plus-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-policy-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-policy-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-rewrite-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-rewrite-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-security-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-security-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-server-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-server-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-servlet-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-servlet-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-servlets-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-servlets-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-util-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-util-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-webapp-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-webapp-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-websocket-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-websocket-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jetty-xml-8.1.8.v20121106.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/jetty-xml-8.1.8.v20121106.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="servlet-api-3.0.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/lib/servlet-api-3.0.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-20141113.jar">
+        <CLASSES>
+          <root url="file:///Users/sviardot/Documents/Enseignements/Web/5MMCAW/applis-web-TPs_2014_SV/TP6-MVC/Exercice-60/webapps/bmt/WEB-INF/lib/json-20141113.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="h2-1.3.168" level="project" />
+    <orderEntry type="library" name="json-20141113" level="project" />
+  </component>
+</module>
